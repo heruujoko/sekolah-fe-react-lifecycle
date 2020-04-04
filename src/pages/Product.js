@@ -7,7 +7,8 @@ export default class Products extends Component {
         super();
         console.log('constructor');
         this.state = {
-            loading: false
+            loading: false,
+            products: [],
         }
         this.routine = 0;
     }
@@ -20,33 +21,65 @@ export default class Products extends Component {
         console.log('render', this.state);
         return (
             <div>
-                { this.state.loading? <p>loading data...</p> : <p>Products</p>}
-                <ProductInfo loading={this.state.loading}/>
+                {/* <ProductInfo loading={this.state.loading}/> */}
+                <table className="table table-stripped table-content">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            !this.state.loading && this.state.products.map((pr) => {
+                                return (
+                                    <tr>
+                                        <td>{pr.id}</td>
+                                        <td>{pr.title}</td>
+                                        <td>{pr.body}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                        {this.state.loading && <tr colSpan={3}>loading...</tr>}
+                    </tbody>
+                </table>
             </div>
         )
     }
 
-    getData() {
+    getData(repeat) {
+        console.log('get data');
         this.setState({ loading: true });
 
-        // delay 2.5s (2500ms)
-        setTimeout(() => {
-            this.setState({ loading: false });
-        }, 2500);
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(response => response.json())
+            .then(data => {
+                console.log(`response`);
+                console.log(data);
+                this.setState({
+                    loading: false,
+                    products: data,
+                });
+
+                if (repeat) {
+                    this.routine = setInterval(() => {
+                        this.getData(false);
+                    }, 2500);
+                }
+            });
     }
 
     componentDidMount() {
         console.log('componentDidMount');
-        this.setState({ loading: true });
-        
-        setTimeout(() => {
-            this.getData();
-        }, 1000);
+        // this.setState({ loading: true });
+        this.getData(true);
 
-        this.routine = setInterval(() => {
-            console.log(`Products => interval 1s`);
-        }, 1000);
-        console.log(`routine ${this.routine}`);
+        // this.routine = setInterval(() => {
+        //     console.log(`Products => interval 1s`);
+        // }, 1000);
+        // console.log(`routine ${this.routine}`);
     }
 
     componentWillUpdate() {

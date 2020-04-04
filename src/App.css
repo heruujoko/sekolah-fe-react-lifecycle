@@ -58,14 +58,21 @@ body {
 
 .sidebar {
   background-color: darkgrey;
-  height: 100vh;
+  height: 100%;
 }
 
-.konten {
-  
+.content {
+  width: 100%;
+  grid-column-start: 2;
+  grid-column-end: 4;
 }
 
 .layout-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.table-content {
+  width: 100%;
+  overflow-y: scroll;
 }
