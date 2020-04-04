@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: red;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-app {
+  padding: 10px !important;
+}
+
+.sidebar {
+  background-color: darkgrey;
+  height: 100vh;
+}
+
+.konten {
+  
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
