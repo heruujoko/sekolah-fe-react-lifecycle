@@ -9,6 +9,7 @@ export default class Products extends Component {
         this.state = {
             loading: false
         }
+        this.routine = 0;
     }
 
     componentWillMount() {
@@ -41,6 +42,11 @@ export default class Products extends Component {
         setTimeout(() => {
             this.getData();
         }, 1000);
+
+        this.routine = setInterval(() => {
+            console.log(`Products => interval 1s`);
+        }, 1000);
+        console.log(`routine ${this.routine}`);
     }
 
     componentWillUpdate() {
@@ -49,6 +55,11 @@ export default class Products extends Component {
 
     componentDidUpdate() {
         console.log('componentDidUpdate');
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+        clearInterval(this.routine);
     }
 
 }
