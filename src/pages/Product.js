@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ProductInfo from '../components/ProductInfo';
-
+import Loading from '../components/Loading';
 export default class Products extends Component {
 
     constructor() {
@@ -42,7 +42,7 @@ export default class Products extends Component {
                                 )
                             })
                         }
-                        {this.state.loading && <tr colSpan={3}>loading...</tr>}
+                        {this.state.loading && <Loading />}
                     </tbody>
                 </table>
             </div>
@@ -59,7 +59,7 @@ export default class Products extends Component {
                 console.log(`response`);
                 console.log(data);
                 this.setState({
-                    loading: false,
+                    // loading: false,
                     products: data,
                 });
 
@@ -73,13 +73,7 @@ export default class Products extends Component {
 
     componentDidMount() {
         console.log('componentDidMount');
-        // this.setState({ loading: true });
-        this.getData(false);
-
-        // this.routine = setInterval(() => {
-        //     console.log(`Products => interval 1s`);
-        // }, 1000);
-        // console.log(`routine ${this.routine}`);
+        this.getData(true);
     }
 
     componentWillUpdate() {

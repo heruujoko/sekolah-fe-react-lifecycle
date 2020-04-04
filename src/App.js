@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import DashboardLayout from './layouts/DashboardLayout';
 import Product from './pages/Product';
 
