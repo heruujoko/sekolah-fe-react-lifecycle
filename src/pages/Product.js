@@ -74,7 +74,7 @@ export default class Products extends Component {
     componentDidMount() {
         console.log('componentDidMount');
         // this.setState({ loading: true });
-        this.getData(true);
+        this.getData(false);
 
         // this.routine = setInterval(() => {
         //     console.log(`Products => interval 1s`);
